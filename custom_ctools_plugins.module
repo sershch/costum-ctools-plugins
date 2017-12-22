@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function custom_ctools_plugins_ctools_plugin_directory($module, $plugin) {
+  if (($module == 'ctools' || $module == 'panels') && !empty($plugin)) {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function custom_ctools_plugins_theme() {
+  return array(
+    'custom_content' => array(
+      'render element' => 'data',
+      'template' => 'plugins/content_types/custom-content'
+    ),
+  );
+}

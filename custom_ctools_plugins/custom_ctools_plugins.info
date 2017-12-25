@@ -1,8 +1,6 @@
-
 name = Custom ctools plugins
 description = Custom Access and Content type plugins
 core = 7.x
-
 package = Chaos tool suite
 
 dependencies[] = ctools

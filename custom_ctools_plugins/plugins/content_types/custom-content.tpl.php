@@ -1,3 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Display a ctolls custom content type.
+ *
+ * Available variables:
+ * - $data['#content']: array with node objects for custom content plugin.
+ */
+?>
+
+<?php
+?>
 <div class="custom-content-paine">
     
 <?php foreach ($data['#content'] as $node): ?>

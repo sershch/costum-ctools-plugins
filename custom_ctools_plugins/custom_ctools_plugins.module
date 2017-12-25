@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ *  Custom ctools primary module file.
+ */
+
+/**
  * Implements hook_ctools_plugin_directory().
  */
 function custom_ctools_plugins_ctools_plugin_directory($module, $plugin) {

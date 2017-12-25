@@ -1,8 +1,13 @@
 <?php
 
 /**
-*  Plugin definition
-*/
+ * @file
+ *  Allow to display custom content type.
+ */
+
+/**
+ * Plugin definition
+ */
 $plugin = array(
   'title' => t('Custom content'),
   'description' => t('Render a custom node fields.'),
@@ -11,7 +16,6 @@ $plugin = array(
   'edit form' => 'custom_content_type_edit_form',
   'single' => TRUE,
 );
-
 
 /**
  * Edit form callback for the content type.
@@ -23,8 +27,8 @@ function custom_content_type_edit_form($form, &$form_state) {
   $form['number_integer'] = array(
     '#type' => 'textfield',
     '#title' => t('Number of nodes'),
-    '#size' => 60, 
-    '#maxlength' => 128, 
+    '#size' => 60,
+    '#maxlength' => 128,
     '#required' => TRUE,
     '#default_value' => !empty($conf['limit']) ? $conf['limit'] : 1,
   );
@@ -46,31 +50,31 @@ function custom_content_type_edit_form_submit($form, &$form_state) {
  * Render callback for the content type.
  */
 function custom_content_type_render($subtype, $conf, $args, $context) {
-    
+
   $limit = $conf['limit'];
-  
+
   //limit nodes
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
-    ->propertyCondition('status', 1)
-    ->propertyOrderBy('created', 'DESC')
-    ->range(0, $limit);
+      ->propertyCondition('status', 1)
+      ->propertyOrderBy('created', 'DESC')
+      ->range(0, $limit);
   $result = $query->execute();
-  
+
   $nodes = array();
   if (isset($result['node'])) {
     $nids = array_keys($result['node']);
     //get node objects
     $nodes = node_load_multiple($nids, array());
   }
-  
+
   $content = array(
-      '#theme' => 'custom_content',
-      '#content' => $nodes,
+    '#theme' => 'custom_content',
+    '#content' => $nodes,
   );
-    
+
   $block = new stdClass();
   $block->content = $content;
-  
+
   return $block;
 }

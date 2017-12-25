@@ -1,8 +1,13 @@
 <?php
 
 /**
-*  Plugin definition
-*/
+ * @file
+ *  Provide access to content, depends on even/odd minute.
+ */
+
+/**
+ * Plugin definition
+ */
 $plugin = array(
   'title' => t('Custom access'),
   'description' => t('Showing the content depends on even/odd minute.'),
@@ -33,11 +38,14 @@ function custom_access_switch_content($conf, $context) {
     
   $current_minute = date('i');
 
-  if ($current_minute % 2 == 0){
+  if ($current_minute % 2 == 0) {
     //show content on even minute  
-    return true; 
-  } else {
-    //hide content on odd minute
-    return false;
+    $access = TRUE; 
   }
+  else {
+    //hide content on odd minute
+    $access = FALSE;
+  }
+  
+  return $access;
 }
